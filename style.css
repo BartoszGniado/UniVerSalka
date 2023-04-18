@@ -9,4 +9,6 @@ html, body {
   top: 0;
   bottom: 0;
   width: 100%;
+  /* background: rgb(211, 15, 15); */
+  background-image: url("IMG_20230311_224531.jpg");
 }
