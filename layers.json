@@ -1,0 +1,17 @@
+{
+    "background": "",
+    "layers": [
+        {
+            "fileName": "IMG_20230226_110038.jpg",
+            "imageExtent": [-2000, -1126, 2000, 1126]
+        },
+        {
+            "fileName": "IMG_20230225_191223.jpg",
+            "imageExtent": [-2000, 1126, 2000, 3126]
+        },
+        {
+            "fileName": "IMG_20230226_110202.jpg",
+            "imageExtent": [2126, -2000, 4126, 2000]
+        }
+    ]
+}
