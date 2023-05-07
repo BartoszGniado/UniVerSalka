@@ -7,58 +7,46 @@ import Static from 'ol/source/ImageStatic.js';
 import ImageLayer from 'ol/layer/Image.js';
 import { getCenter } from 'ol/extent.js';
 
-const extent = [-4000 / 2, -2252 / 2, 4000 / 2, 2252 / 2];
-const projection = new Projection({
-  code: 'yep',
-  units: 'pixels',
-  extent: extent,
-});
+(async () => {
+  const response = await fetch('./layers.json');
+  const config = await response.json();
+  console.log(config);
 
-const map = new Map({
-  target: 'map',
-  layers: [
-    // new TileLayer({
-    //   source: new OSM(),
-    // }),
-    new ImageLayer({
-      source: new Static({
-        url: './IMG_20230226_110038.jpg',
-        projection: projection,
-        imageExtent: [-4000 / 2, -2252 / 2, 4000 / 2, 2252 / 2],
-        wrapX: true,
-      }),
-    }),
-    new ImageLayer({
-      source: new Static({
-        url: './IMG_20230225_191223.jpg',
-        projection: projection,
-        imageExtent: [-4000 / 2, 2252 / 2, 4000 / 2, 6252 / 2],
-        wrapX: true,
-      }),
-    }),
-    new ImageLayer({
-      source: new Static({
-        url: './IMG_20230226_110202.jpg',
-        projection: projection,
-        imageExtent: [4252 / 2, -4000 / 2, 8252 / 2, 4000 / 2],
-        wrapX: true,
-      }),
-    }),
-  ],
-  view: new View({
-    projection: projection,
-    // center: getCenter(extent),
-    center: [0, 0],
-    zoom: 4,
-    maxZoom: 8,
-    minZoom: 1,
-  }),
-});
+  const extent = [-4000 / 2, -2252 / 2, 4000 / 2, 2252 / 2];
+  const projection = new Projection({
+    code: 'yep',
+    units: 'pixels',
+    extent: extent,
+  });
 
-map.on('click', function (evt) {
-  // Get the pointer coordinate
-  console.log(evt.coordinate);
-});
+  const map = new Map({
+    target: 'map',
+    layers: config.layers.map(
+      (l) =>
+        new ImageLayer({
+          source: new Static({
+            url: `./${l.fileName}`,
+            projection: projection,
+            imageExtent: l.imageExtent,
+            wrapX: true,
+          }),
+        })
+    ),
+    view: new View({
+      projection: projection,
+      // center: getCenter(extent),
+      center: [0, 0],
+      zoom: 4,
+      maxZoom: 8,
+      minZoom: 1,
+    }),
+  });
+
+  map.on('click', function (evt) {
+    // Get the pointer coordinate
+    console.log(evt.coordinate);
+  });
+})();
 const openFile = async () => {
   try {
     // Always returns an array.
