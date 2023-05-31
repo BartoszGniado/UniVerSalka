@@ -6,6 +6,7 @@ import Projection from 'ol/proj/Projection.js';
 import Static from 'ol/source/ImageStatic.js';
 import ImageLayer from 'ol/layer/Image.js';
 import { getCenter } from 'ol/extent.js';
+import XYZ from 'ol/source/XYZ.js';
 
 const states = {
   idle: '¯_(ツ)_/¯',
@@ -32,19 +33,27 @@ let fistPoint;
     units: 'pixels',
     extent: extent,
   });
-
+  config.layers;
   const map = new Map({
     target: 'map',
-    layers: config.layers.map(
-      (l) =>
-        new ImageLayer({
-          source: new Static({
-            url: `./${l.fileName}`,
-            projection: projection,
-            imageExtent: l.imageExtent,
-            wrapX: true,
-          }),
-        })
+    layers: config.layers.map((l) =>
+      l.fileName === 'IMG_20230226_110038.jpg'
+        ? new TileLayer({
+            source: new XYZ({
+              url: `./${l.fileName.split('.')[0]}/{z}/{y}/{x}.png`,
+              projection: projection,
+              maxZoom: 4,
+            }),
+            extent: l.imageExtent,
+          })
+        : new ImageLayer({
+            source: new Static({
+              url: `./${l.fileName}`,
+              projection: projection,
+              imageExtent: l.imageExtent,
+              wrapX: true,
+            }),
+          })
     ),
     view: new View({
       projection: projection,
