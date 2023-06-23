@@ -42,7 +42,7 @@ let fistPoint;
             source: new XYZ({
               url: `./${l.fileName.split('.')[0]}/{z}/{y}/{x}.png`,
               projection: projection,
-              maxZoom: 4,
+              maxZoom: l.maxZoom,
             }),
             extent: l.imageExtent,
           })
@@ -74,7 +74,7 @@ let fistPoint;
     if (state === states.draw) {
       state = states.idle;
       config.layers.push({
-        fileName: `./${fileName}`,
+        fileName: `${fileName}`,
         imageExtent: workinLayer.getSource().imageExtent_,
       });
     }
