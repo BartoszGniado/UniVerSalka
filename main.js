@@ -60,8 +60,8 @@ let fistPoint;
       // center: getCenter(extent),
       center: [0, 0],
       zoom: 4,
-      maxZoom: 8,
-      minZoom: 1,
+      maxZoom: 9,
+      minZoom: 3,
     }),
   });
   window.map = map;
