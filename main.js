@@ -58,9 +58,9 @@ let fistPoint;
     view: new View({
       projection: projection,
       // center: [1041, 4386],
-      center: [1044.5093834660345, 4598.968373832653],
+      center: [2582.997897221219, 2403.636230850631],
       // center: [0, 0],
-      zoom: 8,
+      zoom: 6,
       maxZoom: 9,
       minZoom: 3,
     }),
