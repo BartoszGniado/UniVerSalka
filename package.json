@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "start": "vite",
+    "startBG": "vite",
     "build": "vite build",
     "serve": "vite preview",
     "deploy": "gh-pages -d dist"
